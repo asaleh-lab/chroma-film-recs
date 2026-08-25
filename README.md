@@ -42,3 +42,9 @@ python src/filter_recommend.py
 ```powershell
 python src/rag_from_hits.py
 ```
+
+## Serve it with Gradio
+
+```powershell
+python src/app.py
+```
