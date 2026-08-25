@@ -24,3 +24,9 @@ python src/cosine_by_hand.py
 ```powershell
 python src/create_collection.py
 ```
+
+## Let's update a card and drop the collection
+
+```powershell
+python src/query_update_delete.py
+```
