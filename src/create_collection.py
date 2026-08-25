@@ -8,7 +8,7 @@ import chromadb
 from chromadb.utils.embedding_functions import OpenAIEmbeddingFunction
 from dotenv import load_dotenv
 
-load_dotenv()
+load_dotenv()  # OPENAI_API_KEY from .env
 
 QUERY = "something quiet after a long day"
 COLLECTION = "lantern_films"
@@ -17,22 +17,25 @@ films = json.loads(Path("data/films.json").read_text(encoding="utf-8"))
 
 
 def document_for(film):
+    # Chroma embeds this string, not the raw JSON row.
     return f"{film['title']}. {film['description']}"
 
 
+# Same model as cosine_by_hand.py. Chroma calls it on add and on query.
 embed = OpenAIEmbeddingFunction(
     api_key=os.environ["OPENAI_API_KEY"],
     model_name="text-embedding-3-small",
 )
 
+# Files under chroma_data/ so the collection survives this process.
 client = chromadb.PersistentClient(path="chroma_data")
 if COLLECTION in [c.name for c in client.list_collections()]:
-    client.delete_collection(COLLECTION)
+    client.delete_collection(COLLECTION)  # start clean on reruns
 
 collection = client.create_collection(
     name=COLLECTION,
     embedding_function=embed,
-    metadata={"hnsw:space": "cosine"},
+    metadata={"hnsw:space": "cosine"},  # same metric as the hand-scored script
 )
 
 collection.add(
@@ -51,6 +54,7 @@ collection.add(
 
 print(f"Stored {collection.count()} films")
 
+# Embed the query, then nearest neighbours. Distance: lower is closer.
 results = collection.query(query_texts=[QUERY], n_results=3)
 print(f"Query: {QUERY}")
 for film_id, document, distance in zip(
