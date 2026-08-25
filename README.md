@@ -30,3 +30,9 @@ python src/create_collection.py
 ```powershell
 python src/query_update_delete.py
 ```
+
+## Let's filter the catalog and pick a film
+
+```powershell
+python src/filter_recommend.py
+```
