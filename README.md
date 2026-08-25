@@ -36,3 +36,9 @@ python src/query_update_delete.py
 ```powershell
 python src/filter_recommend.py
 ```
+
+## Now we stuff the hits into a prompt
+
+```powershell
+python src/rag_from_hits.py
+```
