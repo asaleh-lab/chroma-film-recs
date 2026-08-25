@@ -18,3 +18,9 @@ Put your OpenAI API key in `.env`.
 ```powershell
 python src/cosine_by_hand.py
 ```
+
+## Now we put the catalog in Chroma
+
+```powershell
+python src/create_collection.py
+```
