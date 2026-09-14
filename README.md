@@ -15,7 +15,7 @@ copy .env.example .env
 
 Put your OpenAI API key in `.env`.
 
-## Let's score two films by hand
+## Score two films by hand
 
 ```powershell
 python src/cosine_by_hand.py
@@ -27,13 +27,13 @@ python src/cosine_by_hand.py
 python src/create_collection.py
 ```
 
-## Let's update a card and drop the collection
+## Update a card and drop the collection
 
 ```powershell
 python src/query_update_delete.py
 ```
 
-## Let's filter the catalog and pick a film
+## Filter the catalog and pick a film
 
 ```powershell
 python src/filter_recommend.py
